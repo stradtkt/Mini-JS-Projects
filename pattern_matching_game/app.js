@@ -18,11 +18,23 @@ function player() {
     button.disabled = true;
     gameClicks = [];
     userClicks = [];
-    runSequence();
+    runSequence(playNum);
 }
 
-function runSequence() {
-    inPlay = true;
+function runSequence(num) {
+    let squares = document.querySelectorAll('.box');
+    num--;
+    if(num < 0) {
+        inPlay = true;
+        return;
+    }
+    let randomNumber = Math.floor(Math.random() * gameColors.length);
+    gameClicks.push(gameColors[randomNumber]);
+    squares[randomNumber].style.opacity = "1";
+    setTimeout(function() {
+        squares[randomNumber].style.opacity = "0.5";
+    }, 500);
+
 }
 
 window.addEventListener("load", setup);
